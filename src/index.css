@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesk:opsz,wght@12..96,400..800&family=Urbanist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Urbanist", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Elegant Light Mode Pastel Palette defaults (Salmverse theme) */
+  --color-slate-50: #FCF5F6;    /* Premium soft blush-pink/lavender light base */
+  --color-slate-100: #F5EBEC;   /* Extremely soft light steel/rose for card sections */
+  --color-slate-200: #EADCE0;   /* Sleek pale rose border divider */
+  --color-slate-250: #E0CFD3;   /* Pastel steel pink outline */
+  --color-slate-300: #D2BDC2;   /* Light dusty pink-shading / Border */
+  --color-slate-400: #7E93A8;   /* Soft slate-blue secondary info */
+  --color-slate-500: #5D6F88;   /* Solid, extremely readable body text */
+  --color-slate-600: #495B72;   /* Dark reading text / icons */
+  --color-slate-700: #35455A;   /* Strong charcoal ink-blue for tags */
+  --color-slate-800: #222E3F;   /* High-contrast subheadings */
+  --color-slate-900: #141E2D;   /* Slate Deepest header */
+  --color-slate-950: #0E141E;   /* Extra dark fallback */
+
+  /* Map indigo to Salmverse cornflower and rose pinks in Light Mode */
+  --color-indigo-50: #FFF5F6;   /* Extremely soft blush pink backdrop */
+  --color-indigo-100: #EEC6C7;  /* Millennium pink highlight */
+  --color-indigo-250: #DB88A4;  /* Dusty Coral Rose */
+  --color-indigo-200: #DB88A4;  /* Dusty Coral Rose accent border */
+  --color-indigo-300: #CC8EB7;  /* Soft lavender orchid */
+  --color-indigo-400: #5A7196;  /* Rich Cornflower blue core text */
+  --color-indigo-500: #4B6285;  /* Active UI Accent link / readable uppercase headers */
+  --color-indigo-600: #394C69;  /* Stronger secondary dark indigo/blue accent */
+  --color-indigo-700: #27364D;  
+  --color-indigo-800: #1C2637;
+  --color-indigo-900: #0E141E;
+
+  /* Smooth gradient transition colors from Salmverse palette */
+  --color-blue-500: #738FBD;    /* Cornflower slate blue */
+  --color-purple-500: #DB88A4;  /* Dusty Coral-pink */
+  --color-purple-600: #CC8EB7;  /* Lavender orchid */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark {
+  /* Rich Luxurious Pastel Dark Mode variables (Salmverse theme) */
+  --color-slate-950: #121824;   /* Deepest Midnight Cornflower Background */
+  --color-slate-900: #1C2637;   /* Dark sleek card background */
+  --color-slate-800: #2B3B54;   /* Cool navy border line */
+  --color-slate-700: #3D5273;   /* Focused slate-navy outline */
+  --color-slate-600: #738FBD;   /* Cornflower blue labels/icons */
+  --color-slate-500: #A8C3D4;   /* Pastel steel blue details */
+  --color-slate-400: #DBD6DF;   /* Soothing soft light lavender-ice copy */
+  --color-slate-300: #F1EFF2;   /* Crisp lavender-tinted white header text */
+  --color-slate-200: #EEC6C7;   /* Delicate millennium pink tag highlights */
+  --color-slate-100: #FFFDFE;   /* Ultra-crisp premium heading contrast */
+  
+  /* Map Indigo in Dark Mode to Salmverse beautiful sky-teals and rose highlights */
+  --color-indigo-50: #1C2637;   
+  --color-indigo-100: #A8C3D4;  
+  --color-indigo-200: #EEC6C7;  
+  --color-indigo-300: #DBD6DF;  
+  --color-indigo-400: #738FBD;  
+  --color-indigo-500: #738FBD;  /* Cornflower active layout accent */
+  --color-indigo-600: #DB88A4;  /* Soft dusty-pink tag accent */
+  --color-indigo-700: #DBD6DF;  
+  --color-indigo-800: #1C2637;  
+  --color-indigo-900: #121824;
+
+  /* Gradient overrides for Dark Mode */
+  --color-blue-500: #738FBD;    /* Cornflower slate blue */
+  --color-purple-500: #DB88A4;  /* Dusty Coral pink */
+  --color-purple-600: #CC8EB7;  /* Lavender orchid */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #2B3B54;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DAE3EC;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3D5273;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Neon Glow Animations and Effects */
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.05) translate(10px, -10px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes floatElement {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.neon-glow-purple {
+  animation: pulseGlow 8s infinite alternate ease-in-out;
+  background: radial-gradient(circle, rgba(219, 136, 164, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.neon-glow-blue {
+  animation: pulseGlow 10s infinite alternate-reverse ease-in-out;
+  background: radial-gradient(circle, rgba(115, 143, 189, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.float-animation {
+  animation: floatElement 4s infinite ease-in-out;
+}
+
+/* Glassmorphism Styles */
+.glass-panel-dark {
+  background: rgba(13, 13, 27, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Shiny Text effect */
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.shiny-text {
+  background: linear-gradient(
+    to right,
+    #94a3b8 20%,
+    #ffffff 40%,
+    #ebebeb 60%,
+    #94a3b8 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: textShine 4s linear infinite;
+}
+
+.dark .shiny-text {
+  background: linear-gradient(
+    to right,
+    #64748b 20%,
+    #f8fafc 40%,
+    #e2e8f0 60%,
+    #64748b 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: textShine 4.5s linear infinite;
+}
+
+/* Infinite Scrolling Marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite reverse;
+}
+
+.marquee-container:hover .animate-marquee,
+.marquee-container:hover .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+

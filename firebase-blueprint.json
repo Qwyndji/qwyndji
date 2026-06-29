@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "Message": {
+      "title": "Contact Message",
+      "description": "A contact form message sent by a visitor",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Visitor's full name"
+        },
+        "email": {
+          "type": "string",
+          "description": "Visitor's email address"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject of the message"
+        },
+        "message": {
+          "type": "string",
+          "description": "Feedback or contact message content"
+        },
+        "createdAt": {
+          "type": "object",
+          "description": "Timestamp when the message was sent"
+        }
+      },
+      "required": ["name", "email", "message", "createdAt"]
+    }
+  },
+  "firestore": {
+    "messages/{messageId}": {
+      "schema": "Message",
+      "description": "Collection of visitor-submitted contact messages"
+    }
+  }
+}
