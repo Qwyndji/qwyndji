@@ -162,8 +162,8 @@ export const portfolioData: PortfolioData = {
     {
       id: "proj-1",
       title: "WHISPXR: Secure Encrypted Platform",
-      description: "Designed robust UI/UX elements and collaborated on implementing high-grade hybrid encryption (RSA-OAEP & AES-256-GCM) to establish seamless, fully end-to-end encrypted chats.",
-      techStack: ["UI/UX Design"],
+      description: "Designed the UI/UX for WHISPXR, an end-to-end encrypted messaging platform, with a focus on usability, accessibility, and a smooth user experience. Worked alongside developers to translate security features into an intuitive interface.",
+      techStack: ["UI/UX Design", "Figma", "Design System", "Prototyping"],
       liveUrl: "https://whispxr.vercel.app/",
       githubUrl: "https://github.com/Qwyndji",
       image: whispxrImage,
@@ -171,8 +171,8 @@ export const portfolioData: PortfolioData = {
     {
       id: "proj-2",
       title: "Assetra: AI Security Assessment",
-      description: "Configured a context-aware secure LLM chatbot with strict prompt constraints aligned with top cybersecurity guidelines to automate threats mapping and system risk analysis.",
-      techStack: ["AI Chatbot", "Risk Mapping", "Security Compliance", "Prompt Engineering"],
+      description: "Developed an AI-powered chatbot for Assetra to support NIST Cybersecurity Framework (CSF) assessments through interactive conversations. Focused on prompt engineering, contextual response design, and seamless web integration to help users identify security gaps and better understand compliance requirements.",
+      techStack: ["AI Chatbot", "Risk Mapping", "Security Compliance", "Prompt Engineering", "NIST CSF"],
       liveUrl: "https://github.com/Qwyndji",
       githubUrl: "https://github.com/Qwyndji",
       image: assetraImage,
@@ -180,9 +180,8 @@ export const portfolioData: PortfolioData = {
     {
       id: "proj-3",
       title: "Capture The Flag (CTF) Challenges",
-      description: "Conquered competitive cybersecurity arenas. Successfully achieved 2nd Place out of 30 Teams in PU CTF Digital Forensics Track (April 2026) and 8th Place out of 38 Teams in PU CTF Ethical Hacking Track (October 2025).",
-      techStack: ["OSINT", "Reverse Engineering", "Web Exploitations", "Cryptography", "FTK Imager", "Autopsy"],
-      liveUrl: "https://github.com/Qwyndji",
+      description: "Capture The Flag competitions have been an important part of my cybersecurity journey, allowing me to transform theory into practical experience. Competing across multiple cybersecurity domains, I earned 2nd Place in the PU CTF 2026 Digital Forensics Track(2026) and 8th Place in the PU CTF 2025 Ethical Hacking Track(2025), while continuously strengthening my technical and problem-solving skills.",
+      techStack: ["OSINT", "Vulnerability Assessment", "Web Exploitations", "Cryptography", "FTK Imager", "Autopsy"],
       image: ctfImage,
     }
   ],
