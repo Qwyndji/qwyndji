@@ -47,7 +47,6 @@ import {
 import { portfolioData, Skill, Project, Certificate, Experience } from './data/portfolioData';
 import { SpotlightCard } from './components/SpotlightCard';
 import { DecryptedText } from './components/DecryptedText';
-import { saveContactMessage, getContactMessages, deleteContactMessage, ContactMessage } from './firebase';
 
 // Map of icons for dynamic rendering
 const IconMap: Record<string, any> = {
@@ -99,7 +98,6 @@ export default function App() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [showCVNotification, setShowCVNotification] = useState(false);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
   // Custom icon resolver
@@ -139,17 +137,14 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Form submit handler with real Firebase integration and auto-email drafting
+  // Form submit handler with auto-email drafting
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSubmitting(true);
     try {
-      // 1. Save message securely to our Cloud Firestore database
-      await saveContactMessage(formData);
-      
-      // 2. Draft raw mailto link and trigger native email app redirect
+      // 1. Draft raw mailto link and trigger native email app redirect
       const mailRecipient = portfolioData.personalInfo.email || 'qwyndji@gmail.com';
       const mailSubject = `[Portfolio] ${formData.subject || 'Collaboration / Project Inquiry'} - ${formData.name}`;
       const mailBody = `Hi ${portfolioData.personalInfo.name},\n\nYou received a new message from a visitor on your portfolio interactive website:\n\n----------------------------------------\nName: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject || "No Subject"}\n\nMessage:\n${formData.message}\n----------------------------------------\n\n(Sent via Portfolio Live Form)`;
@@ -193,16 +188,15 @@ export default function App() {
     }
   };
 
-  // Helper to trigger dummy CV download or open real one if configured
+  // Helper to trigger CV download or draft email request
   const handleDownloadCV = () => {
     if (portfolioData.personalInfo.resumeUrl && portfolioData.personalInfo.resumeUrl !== "#") {
       window.open(portfolioData.personalInfo.resumeUrl, "_blank");
     } else {
-      setShowCVNotification(true);
-      // Auto collapse after 10 seconds to give user time to read
-      setTimeout(() => {
-        setShowCVNotification(false);
-      }, 10000);
+      const email = portfolioData.personalInfo.email || "qwyndji@gmail.com";
+      const subject = encodeURIComponent("Inquiry regarding CV / Resume - Qwyn Celine");
+      const body = encodeURIComponent("Hi Qwyn,\n\nI visited your portfolio and would like to request a copy of your latest CV/Resume.\n\nBest regards,");
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
     }
   };
 
@@ -328,7 +322,7 @@ export default function App() {
         <section id="home" className="pt-12 pb-24 md:py-32 flex flex-col md:flex-row items-center gap-12 lg:gap-20 max-w-7xl mx-auto">
           
           {/* Hero Left Content */}
-          <div className="flex-1 space-y-6 text-center md:text-left order-2 md:order-1">
+          <div className="flex-1 space-y-6 text-center order-2 md:order-1 flex flex-col items-center">
             {/* Main Name & Title */}
             <div className="space-y-2">
               <h1 id="hero-heading-name" className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-balance">
@@ -340,14 +334,14 @@ export default function App() {
             </div>
 
             {/* Hero Description */}
-            <p id="hero-paragraph-desc" className={`font-sans text-base sm:text-lg max-w-xl leading-relaxed text-balance ${
+            <p id="hero-paragraph-desc" className={`font-sans text-base sm:text-lg max-w-xl mx-auto leading-relaxed text-balance ${
               isDark ? 'text-slate-400' : 'text-slate-600'
             }`}>
               {portfolioData.personalInfo.description}
             </p>
 
             {/* Call to Actions buttons */}
-            <div id="hero-actions-container" className="flex flex-wrap items-center gap-4 justify-center md:justify-start pt-2">
+            <div id="hero-actions-container" className="flex flex-wrap items-center gap-4 justify-center pt-2">
               <button
                 id="hero-view-work-btn"
                 onClick={() => handleNavClick('projects')}
@@ -370,7 +364,7 @@ export default function App() {
             </div>
 
             {/* Social Links */}
-            <div id="hero-social-links" className="flex items-center gap-5 justify-center md:justify-start pt-6">
+            <div id="hero-social-links" className="flex items-center gap-5 justify-center pt-6">
               {[
                 { id: 'social-github', href: portfolioData.socialLinks.github, icon: <Github className="w-5.5 h-5.5" />, label: 'GitHub', hoverColor: 'hover:text-white hover:bg-slate-900' },
                 { id: 'social-linkedin', href: portfolioData.socialLinks.linkedin, icon: <Linkedin className="w-5.5 h-5.5" />, label: 'LinkedIn', hoverColor: 'hover:text-blue-600 hover:bg-slate-200/50' },
@@ -436,7 +430,7 @@ export default function App() {
               </p>
 
               <p className={`font-sans text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                I believe in writing clean, scalable code that is extremely maintainable and optimized for modern production performance. I enjoy collaborating on challenging projects and turn your ideas into fully responsive applications.
+                My goal is to become a cybersecurity professional who builds secure, reliable, and impactful digital solutions.
               </p>
 
               {/* Download CV actions */}
@@ -1068,44 +1062,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* CUSTOM CV DOWNLOAD TEMPORARY FLOATING TOAST */}
-      <AnimatePresence>
-        {showCVNotification && (
-          <motion.div
-            id="cv-download-toast"
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className={`fixed bottom-6 left-6 md:left-auto md:right-24 p-5 rounded-2xl shadow-2xl z-50 border max-w-sm flex gap-3 backdrop-blur-md ${
-              isDark 
-                ? 'bg-slate-900/95 border-slate-800 text-slate-100' 
-                : 'bg-white/95 border-slate-200 text-slate-900'
-            }`}
-          >
-            <div className={`p-2.5 rounded-xl border flex items-center justify-center shrink-0 h-10 w-10 ${
-              isDark ? 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400' : 'bg-indigo-50 border-indigo-100 text-indigo-600'
-            }`}>
-              <Shield className="w-5 h-5 animate-pulse" />
-            </div>
-            <div className="space-y-1">
-              <div className="flex items-center justify-between gap-2">
-                <p className="font-display font-semibold text-[13px]">Resume PDF Placeholder</p>
-                <button 
-                  onClick={() => setShowCVNotification(false)}
-                  className={`p-1 rounded-md transition-colors ${
-                    isDark ? 'hover:bg-slate-800 text-slate-500 hover:text-slate-300' : 'hover:bg-slate-100 text-slate-400 hover:text-slate-600'
-                  }`}
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <p className={`text-xs font-sans leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                Hai Qwyn! Kamu bisa langsung menaruh file PDF CV-mu di file <code className="font-mono text-[10px] px-1 py-0.5 rounded bg-slate-150 dark:bg-slate-950 font-bold">/src/data/portfolioData.ts</code> pada field <code className="font-mono text-[10px] px-1 py-0.5 rounded bg-slate-150 dark:bg-slate-950 font-bold">resumeUrl</code> kapan saja jika sudah siap.
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
