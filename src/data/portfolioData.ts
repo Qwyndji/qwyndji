@@ -85,8 +85,8 @@ export const portfolioData: PortfolioData = {
     lastName: "Dji",
     title: "Cybersecurity Specialist & Informatics Student",
     subTitle: "Google Student Ambassador & Cybersecurity Researcher",
-    description: "Informatics Student specializing in Cybersecurity at President University. Engaged in digital forensics, network analysis, ethical hacking, and CTF competitions.",
-    aboutMe: "I am an Informatics student specializing in Cybersecurity at President University with hands-on experience in digital forensics, network analysis, ethical hacking, and CTF competitions. Eager to apply technical knowledge and investigative skills in real-world cybersecurity challenges, aiming to contribute to a professional cybersecurity environment while continuously developing my expertise.",
+    description: "Building technology with security in mind. I'm an Informatics student at President University passionate about cybersecurity and software development, continuously growing through hands-on projects, leadership experiences, and real-world challenges.",
+    aboutMe: "Technology has always been more than just writing code to me. I enjoy understanding how systems work, identifying security risks, and building solutions that are both functional and secure. As an Informatics student specializing in Cybersecurity at President University, I'm continuously growing through hands-on projects and real-world challenges.",
     avatarUrl:  fotoProfilBaru, 
     email: "qwyndji@gmail.com",
     location: "Cikarang, Indonesia",
@@ -111,7 +111,7 @@ export const portfolioData: PortfolioData = {
       icon: "Search",
       color: "from-blue-500/20 to-blue-500/5 text-blue-400 border-blue-500/30",
       percentage: 88,
-      tools: ["FTK Imager", "Autopsy", "NetworkMiner"]
+      tools: ["FTK Imager", "Autopsy", "NetworkMiner", "Exiftool"]
     },
     {
       name: "Network Security",
@@ -119,7 +119,7 @@ export const portfolioData: PortfolioData = {
       level: "Advanced",
       icon: "Network",
       color: "from-indigo-500/20 to-indigo-505/5 text-indigo-400 border-indigo-500/30",
-      percentage: 88,
+      percentage: 85,
       tools: ["Wireshark", "Cisco Packet Tracer", "Ubuntu", "Kali Linux"]
     },
     {
@@ -129,7 +129,7 @@ export const portfolioData: PortfolioData = {
       icon: "Activity",
       color: "from-rose-500/20 to-rose-500/5 text-rose-400 border-rose-500/30",
       percentage: 85,
-      tools: ["Kali Linux", "OSINT", "Burp Suite", "DVWA", "Wazuh"]
+      tools: ["Kali Linux", "OSINT", "Burp Suite", "DVWA", "Wazuh", "Nmap"]
     },
     {
       name: "Cryptography",
@@ -145,8 +145,8 @@ export const portfolioData: PortfolioData = {
       level: "Intermediate",
       icon: "Code2",
       color: "from-violet-500/20 to-violet-500/5 text-violet-400 border-violet-500/30",
-      percentage: 80,
-      tools: ["PHP", "JS", "Python", "Next.js", "TypeScript", "React", "Vite", "Tailwind CSS", "Firebase", "Framer Motion"]
+      percentage: 88,
+      tools: ["PHP", "JavaScript", "Python", "Next.js", "TypeScript", "React", "Vite", "Tailwind CSS", "Firebase", "Framer Motion", "MYSQL", "C++", "Laravel"]
     },
     {
       name: "UI/UX Design",
@@ -154,7 +154,7 @@ export const portfolioData: PortfolioData = {
       level: "Advanced",
       icon: "Palette",
       color: "from-pink-500/20 to-pink-500/5 text-pink-400 border-pink-500/30",
-      percentage: 90,
+      percentage: 83,
       tools: ["Figma", "Canva"]
     }
   ],
@@ -179,14 +179,6 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "proj-3",
-      title: "Network Security & Configuration",
-      description: "Architectured secure logical VLAN structures and topological nodes scaling Cisco Packet Tracer layouts, coupled with active traffic isolation testing on specialized Ubuntu server builds.",
-      techStack: ["Cisco Packet Tracer", "VLAN Segments", "Ubuntu Server", "Traffic Analysis", "Wireshark"],
-      liveUrl: "https://github.com/Qwyndji",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600",
-    },
-    {
-      id: "proj-4",
       title: "Capture The Flag (CTF) Challenges",
       description: "Conquered competitive cybersecurity arenas. Successfully achieved 2nd Place out of 30 Teams in PU CTF Digital Forensics Track (April 2026) and 8th Place out of 38 Teams in PU CTF Ethical Hacking Track (October 2025).",
       techStack: ["OSINT", "Reverse Engineering", "Web Exploitations", "Cryptography", "FTK Imager", "Autopsy"],
