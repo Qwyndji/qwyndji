@@ -217,7 +217,7 @@ export const portfolioData: PortfolioData = {
         "Assist in leading the Student Passion & Talent Division by coordinating programs that help Informatics students develop their interests, talents, and personal growth.",
         "Work closely with other division members to plan and execute student development activities that promote collaboration, engagement, and continuous learning."
       ],
-      skills: ["Event Organization", "Leadership", "Talent Development", "Collaboration"]
+      skills: ["Event Organization", "Leadership", "Talent Development", "Collaboration", "Teamworking"]
     },
     {
       id: "exp-4",
