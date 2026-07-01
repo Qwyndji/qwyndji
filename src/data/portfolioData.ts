@@ -214,8 +214,8 @@ export const portfolioData: PortfolioData = {
       company: "PUMA Informatics - HIMA Informatics",
       period: "Aug 2025 - Present",
       description: [
-        "Serve as Vice Head of Division (Aug 2025 - Present) managing student programming labs and executing large-scale hackathons.",
-        "Assisted in coordinating student development camps and department-specific cybersecurity events as Member (2024 - 2025)."
+        "Assist in leading the Student Passion & Talent Division by coordinating programs that help Informatics students develop their interests, talents, and personal growth.",
+        "Work closely with other division members to plan and execute student development activities that promote collaboration, engagement, and continuous learning."
       ],
       skills: ["Event Organization", "Leadership", "Talent Development", "Collaboration"]
     },
@@ -225,7 +225,7 @@ export const portfolioData: PortfolioData = {
       company: "Public Campus Ministry Jakarta (PCM Jakarta)",
       period: "2025 - Present",
       description: [
-        "Appointed as Head of Community Service (2026-Present) facilitating community programs and leading outreach resources.",
+        "Lead the Community Service Division by managing members and coordinating community outreach programs that create a positive impact through service and volunteer initiatives.",
         "Worked in the Communication & Digital Division (Komdigi) in 2025, branding community feeds and designing digital media assets."
       ],
       skills: ["Outreach Coordination", "Instagram Branding", "Komdigi Content Design"]
