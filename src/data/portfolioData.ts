@@ -13,6 +13,12 @@ import assetraImage from "../assets/images/assetra.jpeg";
 import ctfImage from "../assets/images/ctf.png";
 //@ts-ignore
 import certificateImage from "../assets/images/certificate.png";
+//@ts-ignore
+import bookImage from "../assets/images/book.png";
+//@ts-ignore
+import celahImage from "../assets/images/celah.png";
+//@ts-ignore
+import portfolioImage from "../assets/images/portfolio.png";
 
 export interface Skill {
   name: string;
@@ -33,6 +39,7 @@ export interface Project {
   githubUrl?: string;
   image: string; // Picsum image or local path
   isCreative?: boolean;
+  isLiveSite?: boolean;
 }
 
 export interface Certificate {
@@ -186,25 +193,35 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "proj-3",
+      title: "Interactive Personal Portfolio & Security Showcase",
+      description: "Designed and developed this personal portfolio website to showcase my technical expertise in cybersecurity and software development. Built with a highly responsive, eye-safe premium slate dark design, smooth viewport scroll tracking, interactive DecryptedText animations, and a rich modal showcase featuring active search and filtering filters.",
+      techStack: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "UI/UX Design"],
+      liveUrl: "https://qwyndji.vercel.app/",
+      githubUrl: "https://github.com/Qwyndji",
+      image: portfolioImage,
+      isLiveSite: true,
+    },
+    {
+      id: "proj-4",
       title: "Library Management System",
       description: "Developed a web-based Library Management System to simplify book borrowing and administrative processes. Implemented user authentication, book and category management, rental tracking, and reporting features while designing a structured relational database and applying CRUD operations throughout the application.",
       techStack: ["PHP", "MySQL", "CRUD", "Database Design", "Web Development", "Authentication"],
       githubUrl: "https://github.com/Qwyndji/Book-Library-System",
-      image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=600",
+      image: bookImage,
     },
     {
-      id: "proj-4",
+      id: "proj-5",
       title: "Capture The Flag (CTF) Challenges",
       description: "Capture The Flag competitions have been an important part of my cybersecurity journey, allowing me to transform theory into practical experience. Competing across multiple cybersecurity domains, I earned 2nd Place in the PU CTF 2026 Digital Forensics Track(2026) and 8th Place in the PU CTF 2025 Ethical Hacking Track(2025), while continuously strengthening my technical and problem-solving skills.",
       techStack: ["OSINT", "Vulnerability Assessment", "Web Exploitations", "Cryptography", "FTK Imager", "Autopsy"],
       image: ctfImage,
     },
     {
-      id: "proj-5",
+      id: "proj-6",
       title: "Celah Mimpi: Short Film",
       description: "Directed and wrote the screenplay for Celah Mimpi, a short film created for the FLS2N Competition. Led the creative vision from concept development to production, collaborating with the team to transform ideas into a meaningful visual story while strengthening my leadership, communication, and storytelling skills.",
       techStack: ["Director", "Screenwriter", "Storytelling", "Creative Leadership", "Video Production"],
-      image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=600",
+      image: celahImage,
       isCreative: true,
     }
   ],
