@@ -447,6 +447,7 @@ export default function App() {
 
               <p className={`font-sans text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
                 My goal is to become a cybersecurity professional who builds secure, reliable, and impactful digital solutions.
+              </p>
 
               {/* Download CV actions */}
               <div className="pt-2">
