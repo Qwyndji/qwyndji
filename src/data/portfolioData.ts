@@ -1,3 +1,8 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 // @ts-ignore
 import fotoProfilBaru from "../assets/images/myphoto.jpg";
 // @ts-ignore
@@ -8,6 +13,7 @@ import assetraImage from "../assets/images/assetra.jpeg";
 import ctfImage from "../assets/images/ctf.png";
 //@ts-ignore
 import certificateImage from "../assets/images/certificate.png";
+
 export interface Skill {
   name: string;
   category: string;
@@ -26,6 +32,7 @@ export interface Project {
   liveUrl?: string;
   githubUrl?: string;
   image: string; // Picsum image or local path
+  isCreative?: boolean;
 }
 
 export interface Certificate {
@@ -94,7 +101,7 @@ export const portfolioData: PortfolioData = {
     availability: "Available for cybersecurity projects & internships",
     isAvailable: true,
     experienceYears: "Student",
-    resumeUrl: "https://drive.google.com/file/d/1evHJhrtcNO6iy6Nftx0gRk4gpE1ytmqH/view?usp=sharing", 
+    resumeUrl: "https://drive.google.com/file/d/1t80EeAZcMxTzYMm_1RmR06uzYZNVn_Z8/view?usp=sharing", 
     education: "President University (Informatics, Candidate for Bachelor)",
     gpa: "3.70 / 4.00"
   },
@@ -148,7 +155,7 @@ export const portfolioData: PortfolioData = {
       color: "from-pink-500/20 to-pink-500/5 text-pink-400 border-pink-500/30",
       percentage: 83,
       tools: ["Figma", "Canva"]
-    }
+    },
     {
       name: "Cryptography",
       category: "Cybersecurity",
@@ -179,10 +186,26 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "proj-3",
+      title: "Library Management System",
+      description: "Developed a web-based Library Management System to simplify book borrowing and administrative processes. Implemented user authentication, book and category management, rental tracking, and reporting features while designing a structured relational database and applying CRUD operations throughout the application.",
+      techStack: ["PHP", "MySQL", "CRUD", "Database Design", "Web Development", "Authentication"],
+      githubUrl: "https://github.com/Qwyndji/Book-Library-System",
+      image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=600",
+    },
+    {
+      id: "proj-4",
       title: "Capture The Flag (CTF) Challenges",
       description: "Capture The Flag competitions have been an important part of my cybersecurity journey, allowing me to transform theory into practical experience. Competing across multiple cybersecurity domains, I earned 2nd Place in the PU CTF 2026 Digital Forensics Track(2026) and 8th Place in the PU CTF 2025 Ethical Hacking Track(2025), while continuously strengthening my technical and problem-solving skills.",
       techStack: ["OSINT", "Vulnerability Assessment", "Web Exploitations", "Cryptography", "FTK Imager", "Autopsy"],
       image: ctfImage,
+    },
+    {
+      id: "proj-5",
+      title: "Celah Mimpi: Short Film",
+      description: "Directed and wrote the screenplay for Celah Mimpi, a short film created for the FLS2N Competition. Led the creative vision from concept development to production, collaborating with the team to transform ideas into a meaningful visual story while strengthening my leadership, communication, and storytelling skills.",
+      techStack: ["Director", "Screenwriter", "Storytelling", "Creative Leadership", "Video Production"],
+      image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=600",
+      isCreative: true,
     }
   ],
   certificates: [
