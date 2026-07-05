@@ -29,6 +29,7 @@ import {
   Moon,
   Check,
   ChevronUp,
+  ChevronDown,
   Award,
   Trash2,
   MessageSquare,
@@ -83,11 +84,26 @@ const IconMap: Record<string, any> = {
   Palette
 };
 
-export default function App()
+export default function App() {
   const [isDark, setIsDark] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [projectSearchQuery, setProjectSearchQuery] = useState('');
+  const [projectActiveTab, setProjectActiveTab] = useState<'all' | 'technical' | 'creative'>('all');
+
+  // Block body scroll when project modal is open
+  useEffect(() => {
+    if (showAllProjects) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showAllProjects]);
 
   // Contact form state
   const [formData, setFormData] = useState({
@@ -430,8 +446,7 @@ export default function App()
               </p>
 
               <p className={`font-sans text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                I believe in writing clean, scalable code that is extremely maintainable and optimized for modern production performance. I enjoy collaborating on challenging projects and turn your ideas into fully responsive applications.
-              </p>
+                My goal is to become a cybersecurity professional who builds secure, reliable, and impactful digital solutions.
 
               {/* Download CV actions */}
               <div className="pt-2">
@@ -613,7 +628,7 @@ export default function App()
           {/* SOFT SKILLS INFINITE MARQUEE */}
           <div className="mt-16 pt-12 border-t border-slate-800/10 dark:border-slate-800/30">
             <div className="text-center mb-8 space-y-1">
-              <h3 className="font-display text-base sm:text-lg font-semibold tracking-wide text-slate-500 dark:text-slate-500">
+              <h3 className={`font-display text-base sm:text-lg font-semibold tracking-wide ${isDark ? 'text-white' : 'text-slate-700'}`}>
                 Soft Skills & Strengths
               </h3>
             </div>
@@ -650,11 +665,11 @@ export default function App()
                     key={`${name}-${idx}`}
                     className={`px-6 py-3 rounded-full border shadow-sm backdrop-blur-sm whitespace-nowrap ${
                       isDark 
-                        ? 'bg-slate-900/60 border-slate-800/80 text-slate-200 hover:border-indigo-500/40 hover:bg-slate-900' 
+                        ? 'bg-slate-900/60 border-slate-800/80 text-white hover:border-indigo-500/40 hover:bg-slate-900' 
                         : 'bg-white/90 border-slate-200 text-slate-800 hover:border-indigo-300'
                     } transition-all duration-300 cursor-default`}
                   >
-                    <span className="font-sans text-sm font-semibold tracking-wide">{name}</span>
+                    <span className={`font-sans text-sm font-semibold tracking-wide ${isDark ? 'text-white' : 'text-slate-800'}`}>{name}</span>
                   </div>
                 ))}
               </div>
@@ -672,11 +687,13 @@ export default function App()
               </h2>
             </div>
             
-            <a
+            <button
               id="projects-view-all-btn"
-              href={portfolioData.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => {
+                setProjectActiveTab('all');
+                setProjectSearchQuery('');
+                setShowAllProjects(true);
+              }}
               className={`px-5 py-2.5 rounded-xl text-sm font-semibold inline-flex items-center gap-2 border transition-all duration-300 hover:scale-105 cursor-pointer ${
                 isDark 
                   ? 'border-slate-800 text-slate-300 bg-slate-900/50 hover:bg-slate-900 hover:text-white hover:border-slate-700' 
@@ -685,11 +702,11 @@ export default function App()
             >
               View All Projects
               <ExternalLink className="w-4 h-4" />
-            </a>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioData.projects.map((proj: Project, index: number) => (
+            {portfolioData.projects.filter(p => !p.isCreative).map((proj: Project, index: number) => (
               <motion.div
                 key={proj.id}
                 id={`project-card-motion-${proj.id}`}
@@ -935,7 +952,7 @@ export default function App()
                           </div>
                           <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-sans font-semibold tracking-wide border ${
                             isDark
-                              ? 'bg-slate-950/80 border-slate-800/50 text-slate-400'
+                              ? 'bg-slate-950/80 border-slate-800/50 text-slate-100'
                               : 'bg-slate-50 border-slate-200 text-slate-600'
                           }`}>
                             <Calendar className="w-3 h-3 text-indigo-500" />
@@ -945,9 +962,9 @@ export default function App()
 
                         <ul className="space-y-2 list-none p-0 m-0">
                           {exp.description.map((bullet, bIdx) => (
-                            <li key={bIdx} className="flex items-start gap-2.5 text-xs sm:text-sm font-sans text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <li key={bIdx} className={`flex items-start gap-2.5 text-xs sm:text-sm font-sans leading-relaxed ${isDark ? 'text-white' : 'text-slate-700'}`}>
                               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/70 shrink-0 mt-1.5" />
-                              <span>{bullet}</span>
+                              <span className={isDark ? 'text-white' : 'text-slate-700'}>{bullet}</span>
                             </li>
                           ))}
                         </ul>
@@ -958,7 +975,7 @@ export default function App()
                               key={sIdx}
                               className={`text-[10px] sm:text-[11px] font-sans font-semibold tracking-wide px-2.5 py-1 rounded-md border ${
                                 isDark
-                                  ? 'bg-slate-950/80 border-slate-800/50 text-slate-400'
+                                  ? 'bg-slate-950/80 border-slate-800/50 text-slate-100'
                                   : 'bg-slate-50 border-slate-200/60 text-slate-600'
                               }`}
                             >
@@ -1059,6 +1076,280 @@ export default function App()
           >
             <ChevronUp className="w-5 h-5" />
           </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* ALL PROJECTS SHOWCASE MODAL */}
+      <AnimatePresence>
+        {showAllProjects && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10"
+          >
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+              onClick={() => setShowAllProjects(false)}
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className={`relative w-full max-w-5xl max-h-[85vh] rounded-3xl border flex flex-col overflow-hidden shadow-2xl z-10 ${
+                isDark 
+                  ? 'bg-slate-900 border-slate-800 text-white' 
+                  : 'bg-white border-slate-200 text-slate-900'
+              }`}
+            >
+              {/* Modal Header */}
+              <div className={`p-6 md:p-8 border-b shrink-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${
+                isDark ? 'border-slate-800/80' : 'border-slate-100'
+              }`}>
+                <div className="space-y-1">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-indigo-500">Portfolio Explorer</span>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight">
+                    All My Projects
+                  </h3>
+                </div>
+
+                {/* Close Button */}
+                <button
+                  onClick={() => setShowAllProjects(false)}
+                  className={`absolute top-6 right-6 p-2 rounded-xl border transition-all hover:scale-105 cursor-pointer ${
+                    isDark 
+                      ? 'border-slate-800 bg-slate-950/50 hover:bg-slate-950 hover:border-slate-700 text-slate-400 hover:text-white' 
+                      : 'border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 text-slate-500 hover:text-slate-800'
+                  }`}
+                  aria-label="Close modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Filters & Search Control Bar */}
+              <div className={`px-6 py-4 md:px-8 border-b shrink-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${
+                isDark ? 'bg-slate-950/30 border-slate-800/80' : 'bg-slate-50/50 border-slate-100'
+              }`}>
+                {/* Category selectors */}
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { id: 'all', label: 'All Projects', count: portfolioData.projects.length },
+                    { id: 'technical', label: 'Technical', count: portfolioData.projects.filter(p => !p.isCreative).length },
+                    { id: 'creative', label: 'Creative', count: portfolioData.projects.filter(p => p.isCreative).length },
+                  ].map((tab) => {
+                    const isActive = projectActiveTab === tab.id;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setProjectActiveTab(tab.id as any)}
+                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer ${
+                          isActive
+                            ? 'bg-indigo-600 text-white shadow-md'
+                            : isDark
+                              ? 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-850'
+                              : 'bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:bg-slate-50'
+                        }`}
+                      >
+                        {tab.label} <span className="opacity-60 ml-1">({tab.count})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Search input bar */}
+                <div className="relative w-full md:max-w-xs">
+                  <Search className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 ${
+                    isDark ? 'text-slate-500' : 'text-slate-400'
+                  }`} />
+                  <input
+                    type="text"
+                    placeholder="Search title, tech, or tags..."
+                    value={projectSearchQuery}
+                    onChange={(e) => setProjectSearchQuery(e.target.value)}
+                    className={`w-full pl-10 pr-4 py-1.5 rounded-xl text-xs font-medium border focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-all ${
+                      isDark 
+                        ? 'bg-slate-950/80 border-slate-800 text-white placeholder-slate-500' 
+                        : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+                    }`}
+                  />
+                  {projectSearchQuery && (
+                    <button
+                      onClick={() => setProjectSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Scrollable grid container */}
+              <div className="p-6 md:p-8 overflow-y-auto flex-1">
+                {/* Filter and search execution */}
+                {(() => {
+                  let filtered = portfolioData.projects;
+                  
+                  // Apply active tab filtering
+                  if (projectActiveTab === 'technical') {
+                    filtered = filtered.filter(p => !p.isCreative);
+                  } else if (projectActiveTab === 'creative') {
+                    filtered = filtered.filter(p => p.isCreative);
+                  }
+
+                  // Apply search filtering
+                  if (projectSearchQuery.trim()) {
+                    const q = projectSearchQuery.toLowerCase();
+                    filtered = filtered.filter(p => 
+                      p.title.toLowerCase().includes(q) || 
+                      p.description.toLowerCase().includes(q) ||
+                      p.techStack.some(t => t.toLowerCase().includes(q))
+                    );
+                  }
+
+                  if (filtered.length === 0) {
+                    return (
+                      <div className="flex flex-col items-center justify-center py-16 space-y-4">
+                        <div className={`p-4 rounded-full border ${isDark ? 'bg-slate-950/50 border-slate-800 text-slate-500' : 'bg-slate-50 border-slate-100 text-slate-400'}`}>
+                          <Search className="w-8 h-8" />
+                        </div>
+                        <div className="text-center space-y-1">
+                          <h4 className="font-display font-bold text-lg">No projects match your criteria</h4>
+                          <p className={`text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                            Try adjusting your search query or selecting a different tab.
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setProjectSearchQuery('');
+                            setProjectActiveTab('all');
+                          }}
+                          className="px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
+                        >
+                          Reset Filters
+                        </button>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {filtered.map((proj: Project, index: number) => (
+                        <motion.div
+                          key={proj.id}
+                          id={`modal-project-motion-${proj.id}`}
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.4) }}
+                          className={`flex flex-col h-full rounded-2xl overflow-hidden border transition-all duration-300 ${
+                            isDark 
+                              ? 'bg-slate-950/40 border-slate-800/80 hover:border-indigo-500/30 hover:bg-slate-950/60' 
+                              : 'bg-slate-50/50 border-slate-200/80 shadow-sm hover:border-indigo-400 hover:bg-white'
+                          }`}
+                        >
+                          {/* Project Image Container */}
+                          <div className="relative aspect-video w-full overflow-hidden shrink-0 bg-slate-950">
+                            <img
+                              src={proj.image}
+                              alt={proj.title}
+                              referrerPolicy="no-referrer"
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            {/* Subtle hover overlay gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+
+                            {/* Label overlay (e.g. Creative Project) */}
+                            {proj.isCreative && (
+                              <div className="absolute top-4 left-4 z-20">
+                                <span className="bg-indigo-600/90 text-white border border-indigo-500/30 backdrop-blur-sm font-sans text-[10px] font-bold tracking-wide px-2.5 py-1 rounded-md shadow-md">
+                                  Creative Project
+                                </span>
+                              </div>
+                            )}
+
+                            {/* Action Link overlay shortcuts */}
+                            <div className="absolute top-4 right-4 flex items-center gap-2 z-20">
+                              {proj.githubUrl && (
+                                <a
+                                  id={`modal-${proj.id}-github-link`}
+                                  href={proj.githubUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-2 rounded-xl bg-slate-950/80 border border-white/10 hover:border-white/30 text-white backdrop-blur-sm transition-all duration-250 hover:scale-110"
+                                  title="View GitHub Repository"
+                                >
+                                  <Github className="w-4 h-4" />
+                                </a>
+                              )}
+                              {proj.liveUrl && !proj.liveUrl.includes('github.com') && (
+                                <a
+                                  id={`modal-${proj.id}-live-link`}
+                                  href={proj.liveUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="p-2 rounded-xl bg-slate-950/80 border border-white/10 hover:border-white/30 text-white backdrop-blur-sm transition-all duration-250 hover:scale-110"
+                                  title="View Live Demo"
+                                >
+                                  <ExternalLink className="w-4 h-4" />
+                                </a>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Project Text Information */}
+                          <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                            <div className="space-y-2">
+                              <h4 className="font-display text-lg font-bold tracking-tight">
+                                <span className={isDark ? 'text-white' : 'text-slate-950 font-bold'}>{proj.title}</span>
+                              </h4>
+                              <p className={`font-sans text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+                                {proj.description}
+                              </p>
+                            </div>
+
+                            <div className="space-y-4 pt-1">
+                              {/* Tech stack badges */}
+                              <div className="flex flex-wrap gap-1.5">
+                                {proj.techStack.map((tech) => (
+                                  <span
+                                    key={tech}
+                                    className={`font-sans text-[10px] font-semibold tracking-wide px-2 py-0.5 rounded border ${
+                                      isDark 
+                                        ? 'bg-slate-900 border-slate-800 text-slate-300' 
+                                        : 'bg-indigo-50 border-indigo-100/50 text-indigo-700'
+                                    }`}
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* Modal Footer */}
+              <div className={`p-4 border-t shrink-0 flex items-center justify-between text-[11px] ${
+                isDark ? 'border-slate-800 bg-slate-950/25 text-slate-500' : 'border-slate-100 bg-slate-50/50 text-slate-400'
+              }`}>
+                <p>Showing {portfolioData.projects.length} total creations</p>
+                <button
+                  onClick={() => setShowAllProjects(false)}
+                  className="font-semibold text-indigo-500 hover:text-indigo-400 transition-colors cursor-pointer"
+                >
+                  Close Showcase
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
