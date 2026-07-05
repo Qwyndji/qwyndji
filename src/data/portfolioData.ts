@@ -132,14 +132,6 @@ export const portfolioData: PortfolioData = {
       tools: ["Kali Linux", "OSINT", "Burp Suite", "DVWA", "Wazuh", "Nmap"]
     },
     {
-      name: "Cryptography",
-      category: "Cybersecurity",
-      level: "Intermediate",
-      icon: "Lock",
-      color: "from-amber-500/20 to-amber-500/5 text-amber-400 border-amber-500/30",
-      percentage: 70
-    },
-    {
       name: "Web Programming",
       category: "Development",
       level: "Intermediate",
@@ -157,6 +149,14 @@ export const portfolioData: PortfolioData = {
       percentage: 83,
       tools: ["Figma", "Canva"]
     }
+    {
+      name: "Cryptography",
+      category: "Cybersecurity",
+      level: "Intermediate",
+      icon: "Lock",
+      color: "from-amber-500/20 to-amber-500/5 text-amber-400 border-amber-500/30",
+      percentage: 70
+    },
   ],
   projects: [
     {

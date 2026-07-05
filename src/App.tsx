@@ -83,7 +83,7 @@ const IconMap: Record<string, any> = {
   Palette
 };
 
-export default function App() {
+export default function App()
   const [isDark, setIsDark] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -430,7 +430,7 @@ export default function App() {
               </p>
 
               <p className={`font-sans text-sm ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                My goal is to become a cybersecurity professional who builds secure, reliable, and impactful digital solutions.
+                I believe in writing clean, scalable code that is extremely maintainable and optimized for modern production performance. I enjoy collaborating on challenging projects and turn your ideas into fully responsive applications.
               </p>
 
               {/* Download CV actions */}
